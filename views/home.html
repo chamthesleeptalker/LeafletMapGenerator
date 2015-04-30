@@ -1,0 +1,103 @@
+<div class="container main">
+    <div class="row">
+        <div class="col-lg-12">
+            <br>
+            <br>
+
+            <h2>Leaflet Map Generator</h2>
+
+            <div class="col-lg-6">
+                <p>Make your own map using leaflet! Random project using leaflet and angular :)</p>
+                <h4>Instructions:</h4>
+                <ol>
+                	<li>Click "This Button" to start the map magic. </li>
+                	<li>Pan over to your desired location while dragging the marker.</li>
+                	<li>Supply the needed attribute information.</li>
+                	<li>Click "Generate Map!" button.</li>
+                	<li>Copy the code.</li>
+                	<li>Enjoy! Haha.</li>
+                </ol>
+                <button class="btn btn-success btn-large" ng-click="drag()">This Button</button>
+            </div>
+            <div class="col-lg-5">
+                <p></p>
+                <h4>Reminders:</h4>
+                <ol>
+                	<li>Follow the Instructions! You might catch errors that I'am too lazy to catch :P</li>
+                	<li>Create a <code> div with "map" as its i.d.</code></li>
+                	<li>Add a <code>height</code> attribute to your "map" div. Unless, the map won't render in your page.</li>
+                	<li>CHEERS!</li>
+                </ol>
+            </div>
+        </div>
+            <div class="col-lg-4">
+                <h3>Location</h3>
+                <div class="col-lg-12">
+                    <h4>Latitude</h4><input ng-model="latitude" ng-change="" class="form-control" placeholder=
+                    "14.6859" type="text">
+                </div>
+
+                <div class="col-lg-12">
+                    <h4>Longitude</h4><input ng-model="longitude" ng-change="" class="form-control" placeholder=
+                    "121.525" type="text">
+                </div>
+                <div class="col-lg-12">
+	                <h4>Zoom</h4>
+	                <input ng-model="zoom" class="form-control" placeholder=
+	                    "1 to 21" type="text" maxlength="5">
+	                <br>
+                </div>
+
+                <h3>Attributes</h3>
+                <div class="col-lg-12">
+                    <h4>Name</h4><input ng-model="name" class="form-control" placeholder=
+                    "Juan dela Cruz Village" type="text">
+                </div>
+                <div class="col-lg-12">
+                    <h4>Address</h4><input ng-model="address" class="form-control" placeholder=
+                    "34 Turnip St., Bahay Kubo" type="text">
+                </div>
+                <div class="col-lg-12">
+                    <h4>Contact</h4><input ng-model="contact" class="form-control" placeholder=
+                    "(632) 981-XXXX loc. 1234" type="text">
+                </div>
+                <div class="col-lg-12">
+            	<br>
+            	<button class="btn btn-primary" ng-click="generate()">Generate Map!</button>
+            	<button class="btn btn-info" ng-click="onNew()">New Map!</button>
+            	<br>
+            </div>
+        </div>
+        <div class="col-lg-8">
+        	<i><h5>Pan around the map and drag the marker!</h5></i>
+            <div class="col-lg-11" id="map">
+			<script>
+    		        var map = L.map('map').setView([12,121.5], 5);
+
+			        // add an OpenStreetMap tile layer
+			        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap<\/a> contributors'
+			        }).addTo(map);
+            	</script>
+            </div>
+        </div>
+           	<br>
+
+            <div class="col-lg-12 textClass">
+            	<h3>Map Code</h3>
+            	<code ng-model="code">
+            		{{code}}
+            	</code>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p>charmynemamador@gmail.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
