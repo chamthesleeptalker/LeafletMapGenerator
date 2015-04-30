@@ -41,7 +41,7 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
                 "\t\t}).addTo(map);\n";
 
         if ($scope.name != "" | $scope.address != "" | $scope.contact != ""){
-            content = "\"<b>"+$scope.name+"</b><br><i>"+$scope.address+"</i><br>"+$scope.contact+"\"";
+            content = "<b>"+$scope.name+"</b><br><i>"+$scope.address+"</i><br>"+$scope.contact+"";
 
             marker.bindPopup(content).openPopup();
 
