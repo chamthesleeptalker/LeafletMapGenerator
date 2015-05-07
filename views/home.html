@@ -33,35 +33,43 @@
             </div>
         </div>
             <div class="col-lg-4">
+            <br>
+                <div class="col-lg-11">
+                    <center>
+                        <h4 style="color:#FF7373;display:none;"  id="errorMess">Follow the instructions and all attributes are required!</h4>
+                    </center>
+                </div>
                 <h3>Location</h3>
                 <div class="col-lg-12">
-                    <h4>Latitude</h4><input ng-model="latitude" ng-change="" class="form-control" placeholder=
+                    
+                    <h4>Latitude</h4><input id="lat" ng-model="latitude" ng-change="" class="form-control" placeholder=
                     "14.6859" type="text">
+
                 </div>
 
                 <div class="col-lg-12">
-                    <h4>Longitude</h4><input ng-model="longitude" ng-change="" class="form-control" placeholder=
+                    <h4>Longitude</h4><input id="lon" ng-model="longitude" ng-change="" class="form-control" placeholder=
                     "121.525" type="text">
                 </div>
                 <div class="col-lg-12">
 	                <h4>Zoom</h4>
-	                <input ng-model="zoom" class="form-control" placeholder=
+	                <input id="zoom" ng-model="zoom" class="form-control" placeholder=
 	                    "1 to 21" type="text" maxlength="5">
 	                <br>
                 </div>
 
                 <h3>Attributes</h3>
                 <div class="col-lg-12">
-                    <h4>Name</h4><input ng-model="name" class="form-control" placeholder=
-                    "Juan dela Cruz Village" type="text">
+                    <h4>Name</h4><input id="name" ng-model="name" class="form-control" placeholder=
+                    "Juan dela Cruz Village" type="text" required>
                 </div>
                 <div class="col-lg-12">
-                    <h4>Address</h4><input ng-model="address" class="form-control" placeholder=
-                    "34 Turnip St., Bahay Kubo" type="text">
+                    <h4>Address</h4><input id="address" ng-model="address" ngRequired="true" class="form-control" placeholder=
+                    "34 Turnip St., Bahay Kubo" type="text" required>
                 </div>
                 <div class="col-lg-12">
-                    <h4>Contact</h4><input ng-model="contact" class="form-control" placeholder=
-                    "(632) 981-XXXX loc. 1234" type="text">
+                    <h4>Contact</h4><input id="contact" ng-model="contact" ngRequired="true" class="form-control" placeholder=
+                    "(632) 981-XXXX loc. 1234" type="text" required>
                 </div>
                 <div class="col-lg-12">
             	<br>
@@ -73,13 +81,20 @@
         <div class="col-lg-8">
         	<i><h5>Pan around the map and drag the marker!</h5></i>
             <div class="col-lg-11" id="map">
-			<script>
+				<script>
     		        var map = L.map('map').setView([12,121.5], 5);
 
 			        // add an OpenStreetMap tile layer
 			        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 			        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap<\/a> contributors'
 			        }).addTo(map);
+
+			        var control = L.control.geonames({
+					    username: 'cbi.test'  // Geonames account username.  Must be provided
+					   
+					});
+
+					map.addControl(control);
             	</script>
             </div>
             <h6>

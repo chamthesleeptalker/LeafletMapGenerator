@@ -35,12 +35,37 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
     //Adds a specific marker to the map
     $scope.generate = function(){
 
-       iniMap = "\tvar map = L.map("+holder+").setView(["+$scope.latitude+","+$scope.longitude+"],"+$scope.zoom+");\n"+
-                "\t\tL.tileLayer(\'"+tile+"\', {\n"+
-                "\t\tattribution: \'"+attrb+"\'\n"+
-                "\t\t}).addTo(map);\n";
+        //check if there are no empty fields!
+        function checkFields(scope_field,input_id){
+            if(scope_field === undefined){
+                $(input_id).addClass("error");
+                return true;
+            }else{
+                $(input_id).removeClass("error");
+                return false;
+            }
+        };
 
-        if ($scope.name != "" | $scope.address != "" | $scope.contact != ""){
+       iniMap = "\tvar map = L.map("+holder+").setView(["+$scope.latitude+","+$scope.longitude+"],"+$scope.zoom+");\n"+
+        "\t\tL.tileLayer(\'"+tile+"\', {\n"+
+        "\t\tattribution: \'"+attrb+"\'\n"+
+        "\t\t}).addTo(map);\n";
+
+        if( checkFields($scope.name,"#name")!= false &&
+            checkFields($scope.address,"#address")!= false &&
+            checkFields($scope.contact,"#contact")!= false &&
+            checkFields($scope.latitude,"#lat")!= false &&
+            checkFields($scope.longitude,"#lon")!= false &&
+            checkFields($scope.zoom,"#zoom") ){
+
+            $("#errorMess").show();
+
+            setTimeout(function() {
+               $("#errorMess").hide();   
+            }, 5000);
+
+        }else{
+
             content = "<b>"+$scope.name+"</b><br><i>"+$scope.address+"</i><br>"+$scope.contact+"";
 
             marker.bindPopup(content).openPopup();
@@ -51,6 +76,27 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
             $scope.safeApply(function(){
                 //console.log("in lieu : zoom");
             });
+
+        }
+
+
+
+        /*
+        if ($scope.name != "" | $scope.address != "" | $scope.contact != "") {
+            content = "<b>"+$scope.name+"</b><br><i>"+$scope.address+"</i><br>"+$scope.contact+"";
+
+            marker.bindPopup(content).openPopup();
+
+            addMarker ="\tL.marker(["+$scope.latitude+","+$scope.longitude+"]).addTo(map).bindPopup("+content+").openPopup();";
+            mainCode= "<script>\n\n"+iniMap+"\n\n"+addMarker+"\n\n"+"</script>";
+            $scope.code = mainCode;
+            $scope.safeApply(function(){
+                //console.log("in lieu : zoom");
+            });
+        }else if(($scope.name === "" | $scope.address === "" | $scope.contact === "") && ($scope.latitude === undefined | $scope.longitude === undefined | $scope.zoom === undefined)){
+            alert("Follow the instructions & Click 'This Button'");
+        }else if ($scope.name === undefined){
+            alert("undefined");
         }else{
             addMarker ="\tL.marker(["+$scope.latitude+","+$scope.longitude+"]).addTo(map);";
             mainCode= "<script>\n\n"+iniMap+"\n\n"+addMarker+"\n\n"+"</script>";
@@ -59,8 +105,7 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
             $scope.safeApply(function(){
                 //console.log("in lieu : zoom");
             });
-        }
-
+        }*/
     };
 
     //refreshes the controller to generate new maps
@@ -80,15 +125,12 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
       }
     };
 
-
-
     //search function which allows the map to specify the lat and long and the zoom level
     $scope.drag=function(){
 
         marker.addTo(map);
         // every time the marker is dragged, update the coordinates container
         marker.on('dragend', ondragend);
-
         // Set the initial marker coordinate on load.
         ondragend();
 
@@ -96,12 +138,9 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
             var m = marker.getLatLng();
             lat = m.lat;
             lon = m.lng;
-
             //console.log('Latitude: ' + lat + '<br />Longitude: ' + lon);
-
             $scope.latitude = parseFloat(lat).toFixed(3); 
             $scope.longitude = parseFloat(lon).toFixed(3);
-            
 
             $scope.safeApply(function(){
                 //console.log("in lieu : lat & long");
@@ -111,9 +150,7 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
 
         //update zooom input when map zoom changes
         map.on('zoomend',onzoomend);
-
         onzoomend();
-
         function onzoomend(){
             $scope.zoom = map._zoom;
 
@@ -121,6 +158,8 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
                 //console.log("in lieu : zoom");
             });
         }
+
+
 
     };
 
