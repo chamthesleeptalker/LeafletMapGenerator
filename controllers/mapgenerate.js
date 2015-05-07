@@ -51,12 +51,27 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
         "\t\tattribution: \'"+attrb+"\'\n"+
         "\t\t}).addTo(map);\n";
 
-        if( checkFields($scope.name,"#name")!= false &&
-            checkFields($scope.address,"#address")!= false &&
-            checkFields($scope.contact,"#contact")!= false &&
-            checkFields($scope.latitude,"#lat")!= false &&
-            checkFields($scope.longitude,"#lon")!= false &&
-            checkFields($scope.zoom,"#zoom") ){
+        if( (checkFields($scope.name,"#name") === true &&
+            checkFields($scope.address,"#address")=== true &&
+            checkFields($scope.contact,"#contact")=== true &&
+            checkFields($scope.latitude,"#lat") === true &&
+            checkFields($scope.longitude,"#lon") === true &&
+            checkFields($scope.zoom,"#zoom") === true) ){
+
+            $("#errorMess").show();
+
+            setTimeout(function() {
+               $("#errorMess").hide();   
+            }, 5000);
+
+        }else if((checkFields($scope.name,"#name") === true &&
+            checkFields($scope.address,"#address")=== true &&
+            checkFields($scope.contact,"#contact")=== true &&
+            checkFields($scope.latitude,"#lat") === false &&
+            checkFields($scope.longitude,"#lon") === false &&
+            checkFields($scope.zoom,"#zoom") === false)
+            ){
+
 
             $("#errorMess").show();
 
@@ -65,7 +80,6 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
             }, 5000);
 
         }else{
-
             content = "<b>"+$scope.name+"</b><br><i>"+$scope.address+"</i><br>"+$scope.contact+"";
 
             marker.bindPopup(content).openPopup();
@@ -128,7 +142,8 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
     //search function which allows the map to specify the lat and long and the zoom level
     $scope.drag=function(){
 
-        marker.addTo(map);
+            marker.addTo(map);
+
         // every time the marker is dragged, update the coordinates container
         marker.on('dragend', ondragend);
         // Set the initial marker coordinate on load.

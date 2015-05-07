@@ -12,20 +12,18 @@
                 <p>Make your own map using leaflet! Random project using leaflet and angular :)</p>
                 <h4>Instructions:</h4>
                 <ol>
-                	<li>Click <b>"This Button"</b> to start the map magic. </li>
+                	<li>Click on the <b>Map</b> to start the magic. </li>
                 	<li>Pan over to your desired location while dragging the marker.</li>
                 	<li>Supply the needed attribute information.</li>
                 	<li>Click "Generate Map!" button.</li>
                 	<li>Copy the code.</li>
                 	<li>Enjoy! Haha.</li>
                 </ol>
-                <button class="btn btn-success btn-large" ng-click="drag()">This Button</button>
             </div>
             <div class="col-lg-5">
                 <p></p>
                 <h4>Reminders:</h4>
                 <ol>
-                	<li>Follow the Instructions! You might catch errors that I'am too lazy to catch :P</li>
                 	<li>Create a <code> div with "map" as its i.d.</code></li>
                 	<li>Add a <code>height</code> attribute to your "map" div. Unless, the map won't render in your page. Change the <code>width</code> of the div as well.</li>
                 	<li>CHEERS!</li>
@@ -80,7 +78,7 @@
         </div>
         <div class="col-lg-8">
         	<i><h5>Pan around the map and drag the marker!</h5></i>
-            <div class="col-lg-11" id="map">
+            <div class="col-lg-11" id="map" ng-click="drag()">
 				<script>
     		        var map = L.map('map').setView([12,121.5], 5);
 
