@@ -84,7 +84,7 @@ AngularjsApp.controller("MapGenerator", function($scope, $http, $routeParams, $r
 
             marker.bindPopup(content).openPopup();
 
-            addMarker ="\tL.marker(["+$scope.latitude+","+$scope.longitude+"]).addTo(map).bindPopup("+content+").openPopup();";
+            addMarker ="\tL.marker(["+$scope.latitude+","+$scope.longitude+"]).addTo(map).bindPopup(\""+content+"\"").openPopup();";
             mainCode= "<script>\n\n"+iniMap+"\n\n"+addMarker+"\n\n"+"</script>";
             $scope.code = mainCode;
             $scope.safeApply(function(){
